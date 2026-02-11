@@ -1,0 +1,75 @@
+/* Basic CSS Reset (optional, but recommended) */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark gray text */
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points from the list */
+    padding: 0;
+}
+
+nav li {
+    display: inline; /* Make list items display on the same line */
+    margin: 0 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none; /* Remove underlines from links */
+}
+
+main {
+    padding: 2rem;
+    max-width: 800px; /* Limit the width of the main content */
+    margin: 0 auto; /* Center the main content */
+}
+
+#hero {
+    background-color: #eee;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+button {
+    background-color: #555;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed; /* Stick the footer to the bottom */
+    bottom: 0;
+    width: 100%;
+}
+
+img {
+    max-width: 100%; /* Make images responsive */
+    height: auto;
+}
