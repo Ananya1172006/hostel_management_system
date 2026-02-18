@@ -323,4 +323,253 @@ footer p {
 .logo i {
   color: #3498db;      /* You can change this to any color you like */
   font-size: 28px;     /* Makes the icon slightly larger */
+
+}
+/* Page Banner */
+.page-banner {
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  color: #fff;
+  padding: 150px 0 80px;
+  text-align: center;
+}
+
+.page-banner h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.page-banner p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* Service Info Section */
+.service-info-section {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.service-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.service-info-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 35px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.service-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: #3498db;
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  background: #e3f2fd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.service-icon i {
+  font-size: 35px;
+  color: #3498db;
+}
+
+.service-info-card h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 25px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.timing-details {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.timing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.timing-row:last-child {
+  border-bottom: none;
+}
+
+.timing-row .day {
+  font-weight: 600;
+  color: #555;
+}
+
+.timing-row .time {
+  font-weight: 500;
+  color: #2ecc71;
+}
+
+.timing-row .time.emergency {
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+.special-note {
+  margin-top: 15px;
+  padding: 12px;
+  background: #fff3cd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.special-note.warning {
+  background: #f8d7da;
+}
+
+.special-note i {
+  font-size: 18px;
+  color: #856404;
+}
+
+.special-note.warning i {
+  color: #721c24;
+}
+
+.special-note p {
+  margin: 0;
+  font-size: 14px;
+  color: #856404;
+}
+
+.special-note.warning p {
+  color: #721c24;
+}
+
+/* Additional Info Section */
+.additional-info {
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.additional-info h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.guidelines-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.guideline-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.guideline-item:hover {
+  background: #e3f2fd;
+}
+
+.guideline-item i {
+  color: #2ecc71;
+  font-size: 20px;
+}
+
+.guideline-item p {
+  margin: 0;
+  color: #555;
+  font-size: 15px;
+}
+
+/* Responsive Design for Service Info Page */
+@media (max-width: 992px) {
+  .service-info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .guidelines-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-banner {
+    padding: 120px 0 60px;
+  }
+  
+  .page-banner h1 {
+    font-size: 36px;
+  }
+  
+  .service-info-card {
+    padding: 25px;
+  }
+  
+  .service-info-card h2 {
+    font-size: 24px;
+  }
+  
+  .timing-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .additional-info {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .service-icon i {
+    font-size: 28px;
+  }
+  
+  .guideline-item {
+    flex-direction: column;
+    text-align: center;
+  }
 }
