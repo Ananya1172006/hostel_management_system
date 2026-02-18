@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hostel Management System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;600&family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    /* Ensures the logo and nav are positioned correctly */
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    /* --- MATCHED BRANDING STYLE --- */
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      background: #4f46e5; /* Primary Indigo */
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+    }
+
+    .brand-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #1f2937; /* Dark Gray for light mode header */
+      letter-spacing: -1px;
+      text-transform: lowercase;
+    }
+
+    .brand-name span {
+      color: #6366f1; /* Indigo accent */
+    }
+    /* --- END BRANDING STYLE --- */
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .login-btn {
+      background: #4f46e5;
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      background: #4338ca;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="brand-icon">
+          <i class="fas fa-hotel"></i>
+        </div>
+        <div class="brand-name">my<span>hostel</span></div>
+      </a>
+      
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#" class="login-btn">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <h1 id="typing-text"></h1>
+      <p id="typing-desc"></p>
+      <div class="cta-buttons">
+        <a href="#" class="btn">Student Login</a>
+        <a href="#" class="btn">Admin Login</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2>Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card" data-animate="fade-up">
+          <i class="fas fa-clipboard-list"></i>
+          <h3>Leave Management</h3>
+          <p>Apply & track leave requests online</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up">
+          <i class="fas fa-bed"></i>
+          <h3>Room Allotment</h3>
+          <p>Check room availability & status</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up">
+          <i class="fas fa-clock"></i>
+          <h3>Entry/Exit Records</h3>
+          <p>Track in-time & out-time digitally</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up">
+          <i class="fas fa-bullhorn"></i>
+          <h3>Notices & Alerts</h3>
+          <p>Get real-time hostel updates</p>
+        </div>
+      </div>
+      <div class="feature-image" data-animate="fade-up">
+        <img src="https://via.placeholder.com/800x500" alt="Hostel Management System">
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card" data-animate="fade-up">
+          <i class="fas fa-tools"></i>
+          <h3>Complaint System</h3>
+          <p>Submit & resolve complaints online</p>
+        </div>
+        <div class="feature-card" data-animate="fade-up">
+          <i class="fas fa-leaf"></i>
+          <h3>Eco-Friendly</h3>
+          <p>Reduces paper usage</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-links">
+    <div class="container">
+      <h2 data-animate="fade-up">Quick Links</h2>
+      <div class="links-grid">
+        <a href="#" data-animate="fade-up">Hostel Rules & Regulations</a>
+        <a href="#" data-animate="fade-up">Service Timings</a>
+        <a href="#" data-animate="fade-up">Emergency Contacts</a>
+        <a href="#" data-animate="fade-up">Lost & Found Section</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Hostel Management System. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

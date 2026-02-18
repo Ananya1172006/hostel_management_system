@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | My Hostel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.5);
+            --accent: #10b981;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column; /* Stack branding and card */
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #0f172a;
+        }
+
+        /* Animated Mesh Gradient Background */
+        .bg-animate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 0% 0%, #4f46e5 0%, transparent 35%),
+                        radial-gradient(circle at 100% 0%, #7c3aed 0%, transparent 35%),
+                        radial-gradient(circle at 100% 100%, #2563eb 0%, transparent 35%),
+                        radial-gradient(circle at 0% 100%, #9333ea 0%, transparent 35%);
+            filter: blur(80px);
+            animation: bgShift 15s infinite alternate;
+        }
+
+        @keyframes bgShift {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* --- NEW BRANDING SECTION --- */
+        .main-brand {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            background: white;
+            color: var(--primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .brand-name {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -1.5px;
+            text-transform: lowercase;
+            position: relative;
+        }
+
+        .brand-name span {
+            color: #a5b4fc; /* Lighter indigo for the 'Hostel' part */
+        }
+
+        .brand-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        /* --- END BRANDING SECTION --- */
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 440px;
+            padding: 0 25px;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            animation: cardEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(30px) rotateX(-5deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0); }
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .card-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .card-header p {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-group { margin-bottom: 22px; }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            margin-left: 4px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            border: 1.5px solid transparent;
+            transition: 0.3s;
+        }
+
+        .input-wrapper:focus-within {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .input-wrapper i:not(.toggle-password) {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 5px;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px var(--primary-glow);
+        }
+
+        .row-options {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0 25px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .alert {
+            display: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .alert-error { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+        .alert-success { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .back-link a:hover { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animate"></div>
+
+    <header class="main-brand">
+        <a href="#" class="brand-logo">
+            <div class="brand-icon">
+                <i class="fas fa-hotel"></i>
+            </div>
+            <h2 class="brand-name">my<span>hostel</span><span class="brand-badge">Admin</span></h2>
+        </a>
+    </header>
+
+    <div class="login-wrapper">
+        <div class="card">
+            <div class="card-header">
+                <h1>Admin Login</h1>
+                <p>Manage your hostel operations</p>
+            </div>
+
+            <div id="statusAlert" class="alert"></div>
+
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label>Admin Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user-shield"></i>
+                        <input type="text" id="username" class="form-control" placeholder="Enter username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Secure Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                        <i class="fas fa-eye toggle-password" id="togglePass"></i>
+                    </div>
+                </div>
+
+                <div class="row-options">
+                    <label class="checkbox-group">
+                        <input type="checkbox"> Keep me logged in
+                    </label>
+                    <a href="#" class="forgot-link">Recovery access?</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="submitBtn">
+                    <span>Unlock Dashboard</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html"><i class="fas fa-long-arrow-alt-left"></i> &nbsp; Return to Homepage</a>
+        </div>
+    </div>
+
+    <script>
+        const togglePass = document.querySelector('#togglePass');
+        const passwordInput = document.querySelector('#password');
+
+        togglePass.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePass.classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const alert = document.getElementById('statusAlert');
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                const user = document.getElementById('username').value;
+                const pass = document.getElementById('password').value;
+
+                if(user === 'admin' && pass === 'admin123') {
+                    alert.className = 'alert alert-success';
+                    alert.innerHTML = 'Welcome back! Launching dashboard...';
+                    alert.style.display = 'block';
+                    setTimeout(() => window.location.href = 'dashboard.html', 1000);
+                } else {
+                    alert.className = 'alert alert-error';
+                    alert.innerHTML = 'Access Denied: Incorrect credentials.';
+                    alert.style.display = 'block';
+                    btn.innerHTML = '<span>Unlock Dashboard</span> <i class="fas fa-arrow-right"></i>';
+                    btn.disabled = false;
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
