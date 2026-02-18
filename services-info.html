@@ -7,9 +7,286 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Additional styles to match the main page's modern look */
+    .service-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                  url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+      background-size: cover;
+      color: #fff;
+      padding: 180px 0 100px;
+      text-align: center;
+      position: relative;
+    }
+
+    .service-hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .service-hero p {
+      font-size: 18px;
+      margin-bottom: 0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .service-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .service-tab {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .service-tab:hover, .service-tab.active {
+      background: #2ecc71;
+      transform: translateY(-2px);
+    }
+
+    .service-section {
+      padding: 80px 0;
+    }
+
+    .service-section:nth-child(even) {
+      background: #f8f9fa;
+    }
+
+    .service-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .service-header h2 {
+      font-size: 36px;
+      color: #3498db;
+      margin-bottom: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .service-header p {
+      font-size: 18px;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .modern-card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .modern-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #3498db, #2c3e50);
+      color: #fff;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .card-header i {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .card-header h3 {
+      font-size: 24px;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .card-body {
+      padding: 25px;
+    }
+
+    .timing-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .timing-table tr {
+      border-bottom: 1px solid #eee;
+    }
+
+    .timing-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .timing-table td {
+      padding: 12px 0;
+    }
+
+    .timing-table td:first-child {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .timing-table td:last-child {
+      text-align: right;
+      color: #2ecc71;
+      font-weight: 500;
+    }
+
+    .timing-table .emergency td:last-child {
+      color: #e74c3c;
+      font-weight: 700;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .badge-warning {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .badge-danger {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .badge-success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-box i {
+      color: #3498db;
+      font-size: 20px;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: #2c3e50;
+      font-size: 14px;
+    }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .rule-item {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .rule-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .rule-item i {
+      font-size: 30px;
+      color: #3498db;
+      margin-bottom: 10px;
+    }
+
+    .rule-item h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .rule-item p {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 50px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-item .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #3498db;
+      margin-bottom: 5px;
+    }
+
+    .stat-item .stat-label {
+      color: #666;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .service-hero h1 {
+        font-size: 36px;
+      }
+      
+      .service-tabs {
+        flex-wrap: wrap;
+      }
+      
+      .quick-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Header Section -->
+  <!-- Header Section (Same as main page) -->
   <header>
     <div class="container">
       <div class="logo">Hostel Management System</div>
@@ -25,149 +302,433 @@
     </div>
   </header>
 
-  <!-- Page Banner -->
-  <section class="page-banner">
+  <!-- Hero Section (Matching main page style) -->
+  <section class="service-hero">
+    <div class="hero-overlay"></div>
     <div class="container">
       <h1>Service Information</h1>
-      <p>All the essential services and timings at your fingertips</p>
+      <p>Everything you need to know about hostel facilities, timings, and rules at your fingertips</p>
+      <div class="service-tabs">
+        <a href="#canteen" class="service-tab">Canteen</a>
+        <a href="#laundry" class="service-tab">Laundry</a>
+        <a href="#medical" class="service-tab">Medical</a>
+        <a href="#entry" class="service-tab">Entry Rules</a>
+      </div>
     </div>
   </section>
 
-  <!-- Service Info Grid -->
-  <section class="service-info-section">
+  <!-- Canteen Section -->
+  <section id="canteen" class="service-section">
     <div class="container">
-      <div class="service-info-grid">
-        <!-- Canteen Timings Card -->
-        <div class="service-info-card" data-animate="fade-up">
-          <div class="service-icon">
-            <i class="fas fa-utensils"></i>
-          </div>
-          <h2>Canteen Lunch Timings</h2>
-          <div class="timing-details">
-            <div class="timing-row">
-              <span class="day">Weekdays (Mon-Fri):</span>
-              <span class="time">12:30 PM - 2:30 PM</span>
-            </div>
-            <div class="timing-row">
-              <span class="day">Weekends (Sat-Sun):</span>
-              <span class="time">1:00 PM - 3:00 PM</span>
-            </div>
-            <div class="special-note">
-              <i class="fas fa-info-circle"></i>
-              <p>Special meals available on festival days</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Laundry Timings Card -->
-        <div class="service-info-card" data-animate="fade-up">
-          <div class="service-icon">
-            <i class="fas fa-tshirt"></i>
-          </div>
-          <h2>Laundry Timings</h2>
-          <div class="timing-details">
-            <div class="timing-row">
-              <span class="day">Drop-off:</span>
-              <span class="time">8:00 AM - 10:00 AM</span>
-            </div>
-            <div class="timing-row">
-              <span class="day">Pick-up:</span>
-              <span class="time">5:00 PM - 7:00 PM</span>
-            </div>
-            <div class="timing-row">
-              <span class="day">Processing Time:</span>
-              <span class="time">24-48 hours</span>
-            </div>
-            <div class="special-note">
-              <i class="fas fa-info-circle"></i>
-              <p>Sunday closed for laundry services</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Doctor Availability Card -->
-        <div class="service-info-card" data-animate="fade-up">
-          <div class="service-icon">
-            <i class="fas fa-user-md"></i>
-          </div>
-          <h2>Doctor Availability Timings</h2>
-          <div class="timing-details">
-            <div class="timing-row">
-              <span class="day">Morning:</span>
-              <span class="time">9:00 AM - 12:00 PM</span>
-            </div>
-            <div class="timing-row">
-              <span class="day">Evening:</span>
-              <span class="time">4:00 PM - 7:00 PM</span>
-            </div>
-            <div class="timing-row">
-              <span class="day">Emergency:</span>
-              <span class="time emergency">24/7 Available</span>
-            </div>
-            <div class="special-note">
-              <i class="fas fa-phone-alt"></i>
-              <p>Emergency Contact: +123 456 7890</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hostel Entry Rules Card -->
-        <div class="service-info-card" data-animate="fade-up">
-          <div class="service-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <h2>Hostel Entry Timing Rules</h2>
-          <div class="timing-details">
-            <div class="timing-row">
-              <span class="day">Weekdays Entry:</span>
-              <span class="time">Before 9:00 PM</span>
-            </div>
-            <div class="timing-row">
-              <span class="day">Weekends Entry:</span>
-              <span class="time">Before 10:30 PM</span>
-            </div>
-            <div class="timing-row">
-              <span class="day">Late Entry Fine:</span>
-              <span class="time">₹50 per hour</span>
-            </div>
-            <div class="timing-row">
-              <span class="day">Special Permission:</span>
-              <span class="time">Up to 12:00 AM</span>
-            </div>
-            <div class="special-note warning">
-              <i class="fas fa-exclamation-triangle"></i>
-              <p>Late entry requires prior approval from warden</p>
-            </div>
-          </div>
-        </div>
+      <div class="service-header" data-animate="fade-up">
+        <h2>Canteen Services</h2>
+        <p>Delicious and hygienic food served daily with special meals on festivals</p>
       </div>
+      
+      <div class="service-cards">
+        <!-- Lunch Timings Card -->
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-utensils"></i>
+            <h3>Lunch Timings</h3>
+          </div>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Weekdays (Mon-Fri)</td>
+                <td>12:30 PM - 2:30 PM</td>
+              </tr>
+              <tr>
+                <td>Weekends (Sat-Sun)</td>
+                <td>1:00 PM - 3:00 PM</td>
+              </tr>
+              <tr>
+                <td>Holidays</td>
+                <td>12:30 PM - 2:00 PM</td>
+              </tr>
+            </table>
+            <div class="info-box">
+              <i class="fas fa-info-circle"></i>
+              <p>Special festival meals announced via notice board <span class="badge badge-success">New</span></p>
+            </div>
+          </div>
+        </div>
 
-      <!-- Additional Information Section -->
-      <div class="additional-info" data-animate="fade-up">
-        <h3>Important Guidelines</h3>
-        <div class="guidelines-grid">
-          <div class="guideline-item">
-            <i class="fas fa-check-circle"></i>
-            <p>All timings are subject to change during holidays</p>
+        <!-- Menu Card -->
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-clipboard-list"></i>
+            <h3>Today's Special</h3>
           </div>
-          <div class="guideline-item">
-            <i class="fas fa-check-circle"></i>
-            <p>Special dietary requirements can be requested 24hrs in advance</p>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Monday</td>
+                <td>Butter Chicken</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>Paneer Butter Masala</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>Biryani</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>Chole Bhature</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>Fish Curry</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>Special Thali</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>Pulao + Rajma</td>
+              </tr>
+            </table>
           </div>
-          <div class="guideline-item">
-            <i class="fas fa-check-circle"></i>
-            <p>Laundry services are free for first 5kg, extra charges apply</p>
+        </div>
+
+        <!-- Pricing Card -->
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-tag"></i>
+            <h3>Meal Pricing</h3>
           </div>
-          <div class="guideline-item">
-            <i class="fas fa-check-circle"></i>
-            <p>Medical emergency kit available at reception 24/7</p>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Breakfast</td>
+                <td>₹30</td>
+              </tr>
+              <tr>
+                <td>Lunch</td>
+                <td>₹60</td>
+              </tr>
+              <tr>
+                <td>Dinner</td>
+                <td>₹60</td>
+              </tr>
+              <tr>
+                <td>Monthly Mess</td>
+                <td>₹2500</td>
+              </tr>
+            </table>
+            <div class="info-box">
+              <i class="fas fa-clock"></i>
+              <p>Breakfast: 7:30 AM - 9:00 AM | Dinner: 7:30 PM - 9:30 PM</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer Section -->
+  <!-- Laundry Section -->
+  <section id="laundry" class="service-section" style="background: #f8f9fa;">
+    <div class="container">
+      <div class="service-header" data-animate="fade-up">
+        <h2>Laundry Services</h2>
+        <p>Professional laundry service with quick turnaround</p>
+      </div>
+      
+      <div class="service-cards">
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-tshirt"></i>
+            <h3>Timings</h3>
+          </div>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Drop-off (Morning)</td>
+                <td>8:00 AM - 10:00 AM</td>
+              </tr>
+              <tr>
+                <td>Drop-off (Evening)</td>
+                <td>4:00 PM - 6:00 PM</td>
+              </tr>
+              <tr>
+                <td>Pick-up</td>
+                <td>5:00 PM - 7:00 PM</td>
+              </tr>
+              <tr class="emergency">
+                <td>Sunday</td>
+                <td>Closed</td>
+              </tr>
+            </table>
+            <div class="info-box">
+              <i class="fas fa-clock"></i>
+              <p>Processing time: 24-48 hours <span class="badge badge-warning">Express available</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-rupee-sign"></i>
+            <h3>Price List</h3>
+          </div>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Washing (per kg)</td>
+                <td>₹40</td>
+              </tr>
+              <tr>
+                <td>Ironing (per piece)</td>
+                <td>₹10</td>
+              </tr>
+              <tr>
+                <td>Dry Cleaning</td>
+                <td>₹80/pc</td>
+              </tr>
+              <tr>
+                <td>Bed Sheet</td>
+                <td>₹30</td>
+              </tr>
+              <tr>
+                <td>Monthly Package</td>
+                <td>₹800</td>
+              </tr>
+            </table>
+            <div class="info-box">
+              <i class="fas fa-gift"></i>
+              <p>First 5kg free for new students</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-star"></i>
+            <h3>Services</h3>
+          </div>
+          <div class="card-body">
+            <div class="rule-item" style="margin-bottom: 10px; padding: 10px;">
+              <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+              <h4>Wash & Fold</h4>
+            </div>
+            <div class="rule-item" style="margin-bottom: 10px; padding: 10px;">
+              <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+              <h4>Wash & Iron</h4>
+            </div>
+            <div class="rule-item" style="margin-bottom: 10px; padding: 10px;">
+              <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+              <h4>Only Iron</h4>
+            </div>
+            <div class="rule-item" style="padding: 10px;">
+              <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+              <h4>Stain Removal</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Medical Section -->
+  <section id="medical" class="service-section">
+    <div class="container">
+      <div class="service-header" data-animate="fade-up">
+        <h2>Medical Services</h2>
+        <p>Round-the-clock healthcare support for students</p>
+      </div>
+      
+      <div class="service-cards">
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-user-md"></i>
+            <h3>Doctor Availability</h3>
+          </div>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Morning</td>
+                <td>9:00 AM - 12:00 PM</td>
+              </tr>
+              <tr>
+                <td>Evening</td>
+                <td>4:00 PM - 7:00 PM</td>
+              </tr>
+              <tr class="emergency">
+                <td>Emergency</td>
+                <td>24/7 Available</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-phone-alt"></i>
+            <h3>Emergency Contacts</h3>
+          </div>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Ambulance</td>
+                <td>102</td>
+              </tr>
+              <tr>
+                <td>Hostel Doctor</td>
+                <td>+91 98765 4321</td>
+              </tr>
+              <tr>
+                <td>Warden</td>
+                <td>+91 98765 4322</td>
+              </tr>
+              <tr>
+                <td>Nearby Hospital</td>
+                <td>+91 98765 4323</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-kit-medical"></i>
+            <h3>First Aid Available</h3>
+          </div>
+          <div class="card-body">
+            <div class="rule-item" style="margin-bottom: 10px; padding: 10px;">
+              <i class="fas fa-check"></i>
+              <h4>Basic Medicines</h4>
+            </div>
+            <div class="rule-item" style="margin-bottom: 10px; padding: 10px;">
+              <i class="fas fa-check"></i>
+              <h4>Bandages & Cotton</h4>
+            </div>
+            <div class="rule-item" style="margin-bottom: 10px; padding: 10px;">
+              <i class="fas fa-check"></i>
+              <h4>Pain Killers</h4>
+            </div>
+            <div class="rule-item" style="padding: 10px;">
+              <i class="fas fa-check"></i>
+              <h4>Thermometer</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Entry Rules Section -->
+  <section id="entry" class="service-section" style="background: #f8f9fa;">
+    <div class="container">
+      <div class="service-header" data-animate="fade-up">
+        <h2>Hostel Entry Rules</h2>
+        <p>Important guidelines for student safety and discipline</p>
+      </div>
+      
+      <div class="service-cards">
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-clock"></i>
+            <h3>Entry Timings</h3>
+          </div>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Weekdays</td>
+                <td>Before 9:00 PM</td>
+              </tr>
+              <tr>
+                <td>Weekends</td>
+                <td>Before 10:30 PM</td>
+              </tr>
+              <tr>
+                <td>During Exams</td>
+                <td>Before 8:00 PM</td>
+              </tr>
+              <tr>
+                <td>Special Permission</td>
+                <td>Up to 12:00 AM</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Late Entry Fines</h3>
+          </div>
+          <div class="card-body">
+            <table class="timing-table">
+              <tr>
+                <td>Upto 30 mins late</td>
+                <td>₹50</td>
+              </tr>
+              <tr>
+                <td>30-60 mins late</td>
+                <td>₹100</td>
+              </tr>
+              <tr>
+                <td>1-2 hours late</td>
+                <td>₹200</td>
+              </tr>
+              <tr>
+                <td>2+ hours late</td>
+                <td>₹500 + Meeting</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="modern-card" data-animate="fade-up">
+          <div class="card-header">
+            <i class="fas fa-gavel"></i>
+            <h3>Important Rules</h3>
+          </div>
+          <div class="card-body">
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                <i class="fas fa-circle" style="color: #3498db; font-size: 8px; margin-right: 10px;"></i>
+                Guest entry requires permission
+              </li>
+              <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                <i class="fas fa-circle" style="color: #3498db; font-size: 8px; margin-right: 10px;"></i>
+                ID card mandatory for entry
+              </li>
+              <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                <i class="fas fa-circle" style="color: #3498db; font-size: 8px; margin-right: 10px;"></i>
+                No entry after 11 PM without pass
+              </li>
+              <li style="padding: 8px 0;">
+                <i class="fas fa-circle" style="color: #3498db; font-size: 8px; margin-right: 10px;"></i>
+                Parents meet: Sunday 4-6 PM
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="quick-stats" data-animate="fade-up">
+        <div class="stat-item">
+          <div class="stat-value">98%</div>
+          <div class="stat-label">Students Follow Timings</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Security Available</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">500+</div>
+          <div class="stat-label">Students Hosted</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section (Same as main page) -->
   <footer>
     <div class="container">
       <p>&copy; 2024 Hostel Management System</p>
@@ -185,5 +746,37 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Smooth scrolling for tabs
+    document.querySelectorAll('.service-tab').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Active tab highlighting on scroll
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('.service-section');
+      const tabs = document.querySelectorAll('.service-tab');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 200;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.getAttribute('href') === '#' + current) {
+          tab.classList.add('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
