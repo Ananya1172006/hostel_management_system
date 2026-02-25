@@ -1,5 +1,7 @@
 # hostel_management_system
 
+## Site - https://ananya1172006.github.io/hostel_management_system/index.html
+
 ## 📌 Overview
 
 The Hostel Management System is a web-based application designed to digitize and automate hostel operations such as room allotment, leave management, complaints, entry/exit tracking, and service updates. It replaces manual paper-based processes with a centralized digital platform.
