@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Dashboard | My Hostel</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#6366f1;
+--accent:#10b981;
+--glass-bg:rgba(255,255,255,0.7);
+--glass-border:rgba(255,255,255,0.4);
+--text-main:#0f172a;
+--text-muted:#64748b;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+background:#0f172a;
+overflow:hidden;
+}
+
+/* Background */
+
+.bg-animate{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+background:
+radial-gradient(circle at 0% 0%, #4f46e5 0%, transparent 35%),
+radial-gradient(circle at 100% 0%, #7c3aed 0%, transparent 35%),
+radial-gradient(circle at 100% 100%, #2563eb 0%, transparent 35%),
+radial-gradient(circle at 0% 100%, #9333ea 0%, transparent 35%);
+filter:blur(80px);
+}
+
+/* Sidebar */
+
+.sidebar{
+width:250px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+border-right:1px solid rgba(255,255,255,0.15);
+padding:30px 20px;
+color:white;
+display:flex;
+flex-direction:column;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:40px;
+font-weight:800;
+font-size:22px;
+}
+
+.brand i{
+background:white;
+color:var(--primary);
+padding:10px;
+border-radius:10px;
+}
+
+.nav a{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px;
+margin-bottom:10px;
+border-radius:10px;
+text-decoration:none;
+color:#e2e8f0;
+font-weight:600;
+transition:.3s;
+}
+
+.nav a:hover{
+background:rgba(255,255,255,0.15);
+}
+
+.logout{
+margin-top:auto;
+}
+
+/* Main */
+
+.main{
+flex:1;
+padding:35px;
+overflow-y:auto;
+}
+
+/* Header */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+color:white;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:10px;
+background:rgba(255,255,255,0.15);
+padding:8px 14px;
+border-radius:20px;
+}
+
+/* Stats */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:var(--glass-bg);
+border:1px solid var(--glass-border);
+border-radius:18px;
+padding:22px;
+backdrop-filter:blur(12px);
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.stat{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.stat i{
+font-size:26px;
+color:var(--primary);
+}
+
+.stat h2{
+font-size:24px;
+}
+
+.stat p{
+color:var(--text-muted);
+font-size:14px;
+}
+
+/* Table */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th,td{
+padding:12px;
+text-align:left;
+font-size:14px;
+}
+
+th{
+color:var(--text-muted);
+}
+
+tr{
+border-bottom:1px solid rgba(0,0,0,0.08);
+}
+
+.btn{
+background:var(--primary);
+color:white;
+padding:8px 14px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg-animate"></div>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="brand">
+<i class="fas fa-hotel"></i>
+<span>myhostel</span>
+</div>
+
+<div class="nav">
+<a href="#"><i class="fas fa-chart-line"></i> Dashboard</a>
+<a href="#"><i class="fas fa-bed"></i> My Room</a>
+<a href="#"><i class="fas fa-wallet"></i> Fees</a>
+<a href="#"><i class="fas fa-bullhorn"></i> Notices</a>
+<a href="#"><i class="fas fa-tools"></i> Complaints</a>
+<a href="#"><i class="fas fa-user"></i> Profile</a>
+</div>
+
+<div class="logout">
+<a href="index.html" class="nav">
+<i class="fas fa-sign-out-alt"></i> Logout
+</a>
+</div>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="header">
+
+<h1>Student Dashboard</h1>
+
+<div class="profile">
+<i class="fas fa-user"></i>
+Rahul Sharma
+</div>
+
+</div>
+
+<!-- Student Cards -->
+
+<div class="stats">
+
+<div class="card">
+<div class="stat">
+<div>
+<h2>Room 203</h2>
+<p>Your Room</p>
+</div>
+<i class="fas fa-bed"></i>
+</div>
+</div>
+
+<div class="card">
+<div class="stat">
+<div>
+<h2>Paid</h2>
+<p>Fee Status</p>
+</div>
+<i class="fas fa-credit-card"></i>
+</div>
+</div>
+
+<div class="card">
+<div class="stat">
+<div>
+<h2>2</h2>
+<p>Active Complaints</p>
+</div>
+<i class="fas fa-tools"></i>
+</div>
+</div>
+
+<div class="card">
+<div class="stat">
+<div>
+<h2>5</h2>
+<p>New Notices</p>
+</div>
+<i class="fas fa-bullhorn"></i>
+</div>
+</div>
+
+</div>
+
+<!-- Notices -->
+
+<div class="card">
+
+<h3>Latest Hostel Notices</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Date</th>
+<th>Notice</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>10 March</td>
+<td>Water maintenance between 10AM-1PM</td>
+</tr>
+
+<tr>
+<td>8 March</td>
+<td>Mess menu updated</td>
+</tr>
+
+<tr>
+<td>5 March</td>
+<td>Hostel curfew changed to 10:30PM</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
