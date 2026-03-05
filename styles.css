@@ -591,6 +591,7 @@ footer p {
   flex-direction: column;
   min-width: 180px;
   padding: 8px 0;
+  z-index: 2000;
 }
 
 .dropdown-menu li {
@@ -613,4 +614,5 @@ footer p {
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
 
