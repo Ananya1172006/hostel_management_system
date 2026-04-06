@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | My Hostel</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-outer: #d0c2d0; /* Mauve */
+  --bg-inner: #fdfaf8; /* Cream */
+  --sidebar-bg: #f4eae7; /* Slightly darker cream */
+  --card-light: #e5dbe5; /* Lilac/Mauve */
+  --card-dark: #8c768c; /* Deep Purple */
+  --card-white: #ffffff;
+  --text-main: #332633;
+  --text-muted: #726272;
+  --text-light: #f5edf5;
+  --accent-pink: #ed738a;
+  --accent-teal: #4dbfb2;
+  --accent-yellow: #f1b74a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-outer);
+  overflow: hidden;
+}
+
+.app-container {
+  width: 95vw;
+  height: 94vh;
+  background: var(--bg-inner);
+  border-radius: 40px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  background: var(--sidebar-bg);
+  padding: 40px 20px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.brand i {
+  color: var(--card-dark);
+  font-size: 24px;
+}
+
+.brand span {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--card-dark);
+}
+
+.user-profile-side {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.user-profile-side .avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--card-dark);
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+}
+
+.user-profile-side h3 {
+  font-size: 16px;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.user-profile-side p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  margin-bottom: 2px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 500;
+  transition: .3s;
+}
+
+.nav a:hover {
+  background: rgba(140, 118, 140, 0.1);
+}
+
+.nav a.active {
+  background: var(--card-white);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  color: var(--card-dark);
+}
+
+.logout {
+  margin-top: auto;
+  border-top: 1px solid rgba(140, 118, 140, 0.1);
+  padding-top: 15px;
+}
+
+/* --- MAIN CONTENT --- */
+.main {
+  flex: 1;
+  padding: 40px 50px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 28px;
+  color: var(--text-main);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-bar {
+  background: var(--card-light);
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 250px;
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  flex: 1;
+}
+
+/* Dashboard Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Admin Stat boxes mapped to the image style */
+.stat-card-light {
+  background: var(--card-white);
+  border-radius: 25px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--card-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--card-dark);
+}
+
+.stat-info h2 { font-size: 28px; color: var(--text-main); line-height: 1; margin-bottom: 5px; }
+.stat-info p { font-size: 14px; color: var(--text-muted); }
+
+/* Right Column (Dark Stats) */
+.right-col {
+  background: var(--card-light);
+  border-radius: 25px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stat-box {
+  background: var(--card-dark);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-light);
+  flex: 1;
+}
+
+.stat-box h3 {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+/* Room Grid Styling */
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.room-box {
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  transition: .2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+}
+.room-box:hover { transform: translateY(-3px); }
+.room-box h4 { font-size: 16px; margin-bottom: 4px; }
+.room-box p { font-size: 11px; font-weight: 600; }
+
+.r-green { background: #dcfce7; color: #166534; }
+.r-yellow { background: #fef08a; color: #854d0e; }
+.r-red { background: #fee2e2; color: #991b1b; }
+
+/* Tables */
+.table-card {
+  background: var(--card-white);
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+tr {
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+/* Base Buttons */
+.btn {
+  background: var(--card-dark);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: .3s;
+}
+.btn:hover { opacity: .9; }
+
+/* Modals */
+.modal {
+  display: none; 
+  position: fixed; 
+  top: 0; left: 0; width: 100%; height: 100%; 
+  background: rgba(0,0,0,0.4); 
+  z-index: 2000; 
+  align-items: center; justify-content: center;
+}
+
+.modal-content {
+  background: var(--card-white); 
+  padding: 40px; 
+  border-radius: 24px; 
+  width: 450px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 { color: var(--card-dark); margin-bottom: 20px; }
+.modal-content input, .modal-content select {
+  width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #e5dbe5; outline: none; background: #fdfaf8; color: var(--text-main); font-family: inherit;
+}
+.modal-content input:focus { border-color: var(--card-dark); }
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand">
+      <i class="fas fa-hotel"></i>
+      <span>myhostel</span>
+    </div>
+
+    <div class="user-profile-side">
+      <div class="avatar"><i class="fas fa-user-shield"></i></div>
+      <h3>System Admin</h3>
+      <p>Management</p>
+    </div>
+
+    <div class="nav">
+      <a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="#" onclick="switchTab('students')" id="nav-students"><i class="fas fa-users"></i> Students</a>
+      <a href="#" onclick="switchTab('payments')" id="nav-payments"><i class="fas fa-credit-card"></i> Payments</a>
+      <a href="#" onclick="switchTab('attendance')" id="nav-attendance"><i class="fas fa-calendar-check"></i> Attendance</a>
+      <a href="#" onclick="switchTab('complaints')" id="nav-complaints"><i class="fas fa-tools"></i> Complaints</a>
+      <a href="#" onclick="switchTab('leaves')" id="nav-leaves"><i class="fas fa-envelope-open-text"></i> Leaves</a>
+      <a href="#" onclick="switchTab('notices')" id="nav-notices"><i class="fas fa-bullhorn"></i> Notices</a>
+      <a href="#" onclick="switchTab('rooms')" id="nav-rooms"><i class="fas fa-bed"></i> Rooms</a>
+    </div>
+
+    <div class="logout">
+      <a href="index.html" class="nav" style="color:var(--text-muted);">
+        <i class="fas fa-sign-out-alt"></i> Log out
+      </a>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    
+    <div class="header">
+      <h1>ADMINISTRATION</h1>
+      <div class="top-actions">
+        <div class="search-bar">
+          <i class="fas fa-search" style="color:var(--text-muted)"></i>
+          <input type="text" placeholder="Search data...">
+        </div>
+        <i class="fas fa-cog" style="color:var(--card-dark); font-size: 20px;"></i>
+      </div>
+    </div>
+
+    <!-- Dashboard Tab -->
+    <div id="tab-dashboard" class="tab-content">
+      <div class="dashboard-grid">
+        
+        <div class="left-col">
+          <div class="row-cards">
+            <div class="stat-card-light">
+              <div class="stat-icon"><i class="fas fa-users"></i></div>
+              <div class="stat-info">
+                <h2 id="totalStudentsDisplay">--</h2>
+                <p>Total Registered Students</p>
+              </div>
+            </div>
+
+            <div class="stat-card-light">
+              <div class="stat-icon" style="background:#e8f4f3; color:#4dbfb2;"><i class="fas fa-bed"></i></div>
+              <div class="stat-info">
+                <h2 id="occupiedRoomsDisplay">--</h2>
+                <p>Rooms Occupied Currently</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card-light" style="flex:1; align-items:flex-start; flex-direction:column;">
+            <p style="color:var(--text-muted); font-size:14px; margin-bottom:15px;">Monthly Revenue Snapshot</p>
+            <div style="display:flex; align-items:flex-end; gap:20px; height: 100px; width: 100%; border-bottom: 1px solid #eee; padding-bottom:10px;">
+              <!-- fake chart bars -->
+              <div style="width:15%; background: var(--card-light); height:40%; border-radius:5px 5px 0 0;"></div>
+              <div style="width:15%; background: rgba(140, 118, 140, 0.4); height:60%; border-radius:5px 5px 0 0;"></div>
+              <div style="width:15%; background: rgba(140, 118, 140, 0.7); height:30%; border-radius:5px 5px 0 0;"></div>
+              <div style="width:15%; background: var(--card-dark); height:90%; border-radius:5px 5px 0 0;"></div>
+            </div>
+            <h2 style="margin-top:15px; color:var(--text-main);">₹ 2.4L <span style="font-size:12px; font-weight:normal; color:var(--text-muted);">This month</span></h2>
+          </div>
+        </div>
+
+        <div class="right-col">
+          <div class="stat-box">
+            <h3>Active Maintenance</h3>
+            <h2 id="activeComplaintsDisplay" style="font-size:40px;">--</h2>
+            <p style="font-size:12px; opacity:0.8;">Requires attention</p>
+          </div>
+          <div class="stat-box" style="justify-content:center;">
+             <i class="fas fa-chart-pie" style="font-size:40px; margin-bottom:10px;"></i>
+             <p style="font-size:12px;">Analytics Active</p>
+          </div>
+        </div>
+
+      </div>
+    </div> <!-- end tab-dashboard -->
+
+    <!-- Students Tab -->
+    <div id="tab-students" class="tab-content" style="display:none;">
+      <div class="table-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3 style="color:var(--text-main);">Student Registry</h3>
+          <button class="btn" style="background:var(--accent-teal);" onclick="document.getElementById('addStudentModal').style.display='flex'">+ New Student</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Room</th>
+              <th>Course</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="recentStudentsTableBody">
+            <tr><td colspan="5">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- end tab-students -->
+
+    <!-- Complaints Tab -->
+    <div id="tab-complaints" class="tab-content" style="display:none;">
+      <div class="table-card">
+        <h3 style="color:var(--text-main);">Maintenance & Complaints</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Room</th>
+              <th>Complaint</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="complaintsTableBody">
+            <tr><td colspan="5">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- end tab-complaints -->
+
+    <!-- Attendance -->
+    <div id="tab-attendance" class="tab-content" style="display:none;">
+      <div class="table-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3 style="color:var(--text-main);">Daily Attendance</h3>
+          <input type="date" id="attendanceDate" class="btn" style="background:var(--card-light); color:var(--text-main); font-family:inherit;" onchange="loadAttendance()">
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Roll No</th>
+              <th>Room</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="attendanceTableBody">
+            <tr><td colspan="5">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- end tab-attendance -->
+
+    <!-- Payments -->
+    <div id="tab-payments" class="tab-content" style="display:none;">
+      <div class="table-card">
+        <h3 style="color:var(--text-main);">Fee Validation System</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Roll No</th>
+              <th>Fee Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="paymentsTableBody">
+            <tr><td colspan="4">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- end tab-payments -->
+
+    <!-- Leaves Tab -->
+    <div id="tab-leaves" class="tab-content" style="display:none;">
+      <div class="table-card">
+        <h3 style="color:var(--text-main);">Leave Requests</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Roll No</th>
+              <th>Reason</th>
+              <th>Dates</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="leavesTableBody">
+            <tr><td colspan="6">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- end tab-leaves -->
+
+    <!-- Notices Tab -->
+    <div id="tab-notices" class="tab-content" style="display:none;">
+      <div class="table-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3 style="color:var(--text-main);">Notices</h3>
+          <button class="btn" style="background:var(--accent-teal);" onclick="document.getElementById('addNoticeModal').style.display='flex'">+ Publish Notice</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Notice</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="noticesTableBody">
+            <tr><td colspan="3">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- end tab-notices -->
+
+    <!-- Rooms Tab -->
+    <div id="tab-rooms" class="tab-content" style="display:none;">
+      <div class="table-card">
+        <h3 style="color:var(--text-main);">Room Inventory & Occupancy</h3>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">
+           <i class="fas fa-square" style="color:#dcfce7"></i> Empty (Green) &nbsp; 
+           <i class="fas fa-square" style="color:#fef08a"></i> Half Full (Yellow) &nbsp; 
+           <i class="fas fa-square" style="color:#fee2e2"></i> Full (Red)
+        </p>
+        <div id="roomsGridContainer" class="room-grid">
+           <!-- boxes injected here -->
+        </div>
+      </div>
+    </div> <!-- end tab-rooms -->
+
+  </div><!-- end main -->
+</div>
+
+<!-- Add Student Modal -->
+<div id="addStudentModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:var(--text-main); padding:30px; border-radius:12px; width:400px; color:white;">
+        <h2 style="margin-bottom:20px;">Add New Student</h2>
+        <form id="addStudentForm">
+            <input type="text" id="newSName" placeholder="Full Name" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none;">
+            <input type="text" id="newSRoll" placeholder="Roll No" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none;">
+            <input type="text" id="newSUser" placeholder="Username" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none;">
+            <input type="text" id="newSPass" placeholder="Password" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none;">
+            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                <input type="number" id="newSRoom" placeholder="Room ID" style="width:50%; padding:10px; border-radius:6px; border:none; outline:none;">
+                <input type="text" id="newSCourse" placeholder="Course" style="width:50%; padding:10px; border-radius:6px; border:none; outline:none;">
+            </div>
+            
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn" style="background:#64748b;" onclick="document.getElementById('addStudentModal').style.display='none'">Cancel</button>
+                <button type="submit" class="btn" style="background:#10b981;" id="saveStudentBtn">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Student Modal -->
+<div id="editStudentModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:var(--text-main); padding:30px; border-radius:12px; width:400px; color:white;">
+        <h2 style="margin-bottom:20px;">Edit Student</h2>
+        <form id="editStudentForm">
+            <input type="hidden" id="editSId">
+            <input type="text" id="editSName" placeholder="Full Name" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none;">
+            <input type="text" id="editSRoll" placeholder="Roll No" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none;">
+            <input type="text" id="editSUser" placeholder="Username" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none;">
+            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                <input type="number" id="editSRoom" placeholder="Room ID" style="width:33%; padding:10px; border-radius:6px; border:none; outline:none;">
+                <input type="text" id="editSCourse" placeholder="Course" style="width:33%; padding:10px; border-radius:6px; border:none; outline:none;">
+                <select id="editSFee" style="width:33%; padding:10px; border-radius:6px; border:none; outline:none;">
+                    <option value="Paid">Paid</option>
+                    <option value="Pending">Pending</option>
+                </select>
+            </div>
+            
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn" style="background:#64748b;" onclick="document.getElementById('editStudentModal').style.display='none'">Cancel</button>
+                <button type="submit" class="btn" style="background:#10b981;" id="updateStudentBtn">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add Notice Modal -->
+<div id="addNoticeModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:var(--text-main); padding:30px; border-radius:12px; width:400px; color:white;">
+        <h2 style="margin-bottom:20px;">Publish Notice</h2>
+        <form id="addNoticeForm">
+            <input type="text" id="newNoticeDate" placeholder="e.g. 15 March" required style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none;">
+            <textarea id="newNoticeText" placeholder="Notice details..." required style="width:100%; height:100px; padding:10px; margin-bottom:15px; border-radius:6px; border:none; outline:none; font-family:inherit;"></textarea>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn" style="background:#64748b;" onclick="document.getElementById('addNoticeModal').style.display='none'">Cancel</button>
+                <button type="submit" class="btn" style="background:#10b981;" id="saveNoticeBtn">Publish</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    window.switchTab = function(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.nav a').forEach(el => { if(el.id) el.classList.remove('active'); });
+        
+        const tab = document.getElementById('tab-' + tabId);
+        if(tab) tab.style.display = 'block';
+        
+        const navLink = document.getElementById('nav-' + tabId);
+        if(navLink) navLink.classList.add('active');
+    };
+
+    async function loadAdminData() {
+        // Fetch Admin Dashboard Stats
+        try {
+            const resp = await fetch('/api/admin/dashboard');
+            const data = await resp.json();
+            if(resp.ok) {
+                document.getElementById('totalStudentsDisplay').textContent = data.total_students || 0;
+                document.getElementById('occupiedRoomsDisplay').textContent = data.occupied_rooms || 0;
+                document.getElementById('activeComplaintsDisplay').textContent = data.active_complaints || 0;
+            }
+        } catch(e) { console.error(e); }
+
+        // Fetch Students & Payments
+        try {
+            const resp = await fetch('/api/admin/students');
+            const data = await resp.json();
+            const tbody = document.getElementById('recentStudentsTableBody');
+            const payTbody = document.getElementById('paymentsTableBody');
+            tbody.innerHTML = '';
+            payTbody.innerHTML = '';
+            
+            if(data.students && data.students.length > 0) {
+                data.students.forEach(s => {
+                    // Students table
+                    const tr = document.createElement('tr');
+                    const badge = `<span style="padding:4px 8px; border-radius:4px; font-size:12px; background:${s.status==='Active' ? '#dcfce7' : '#fef3c7'}; color:${s.status==='Active' ? '#166534' : '#92400e'}">${s.status}</span>`;
+                    tr.innerHTML = `
+                        <td>${s.name}</td>
+                        <td>${s.room_id || 'N/A'}</td>
+                        <td>${s.course}</td>
+                        <td>${badge}</td>
+                        <td>
+                            <button class="btn" style="background:#3b82f6; padding:5px 10px; font-size:12px;" onclick='openEditModal(${JSON.stringify(s)})'>Edit</button>
+                            <button class="btn" style="background:#ef4444; padding:5px 10px; font-size:12px;" onclick="deleteStudent(${s.id})">Del</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+
+                    // Payments table
+                    const payTr = document.createElement('tr');
+                    const feeBadge = `<span style="padding:4px 8px; border-radius:4px; font-size:12px; background:${s.fee_status==='Paid' ? '#dcfce7' : '#fee2e2'}; color:${s.fee_status==='Paid' ? '#166534' : '#991b1b'}">${s.fee_status || 'Pending'}</span>`;
+                    payTr.innerHTML = `
+                        <td>${s.name}</td>
+                        <td>${s.roll_no}</td>
+                        <td>${feeBadge}</td>
+                        <td>
+                            <button class="btn" style="background:#3b82f6; padding:5px 10px; font-size:12px;" onclick="toggleFeeStatus(${s.id}, '${s.fee_status || 'Pending'}')">Toggle Status</button>
+                        </td>
+                    `;
+                    payTbody.appendChild(payTr);
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="5">No students found</td></tr>';
+                payTbody.innerHTML = '<tr><td colspan="4">No students found</td></tr>';
+            }
+        } catch(e) { console.error(e); }
+
+        // Fetch Complaints
+        try {
+            const resp = await fetch('/api/admin/complaints');
+            const data = await resp.json();
+            const tbody = document.getElementById('complaintsTableBody');
+            tbody.innerHTML = '';
+            if(data.complaints && data.complaints.length > 0) {
+                data.complaints.forEach(c => {
+                    const tr = document.createElement('tr');
+                    const badge = `<span style="padding:4px 8px; border-radius:4px; font-size:12px; background:${c.status==='Completed' ? '#dcfce7' : '#fef3c7'}; color:${c.status==='Completed' ? '#166534' : '#92400e'}">${c.status}</span>`;
+                    tr.innerHTML = `
+                        <td>${c.student_name}</td>
+                        <td>${c.room_id || 'N/A'}</td>
+                        <td>${c.title}</td>
+                        <td>${badge}</td>
+                        <td>
+                            ${c.status === 'Pending' ? `<button class="btn" style="background:#10b981; padding:5px 10px; font-size:12px;" onclick="resolveComplaint(${c.id})">Resolve</button>` : 'Resolved'}
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="5">No complaints found</td></tr>';
+            }
+        } catch(e) { console.error(e); }
+    }
+
+    // Modal Helpers
+    window.openEditModal = function(student) {
+        document.getElementById('editSId').value = student.id;
+        document.getElementById('editSName').value = student.name;
+        document.getElementById('editSRoll').value = student.roll_no;
+        document.getElementById('editSUser').value = student.username;
+        document.getElementById('editSRoom').value = student.room_id || '';
+        document.getElementById('editSCourse').value = student.course || '';
+        document.getElementById('editSFee').value = student.fee_status || 'Pending';
+        document.getElementById('editStudentModal').style.display = 'flex';
+    };
+
+    window.deleteStudent = async function(id) {
+        if(!confirm('Are you sure you want to delete this student?')) return;
+        try {
+            await fetch(`/api/admin/students/${id}`, { method: 'DELETE' });
+            loadAdminData();
+        } catch(e) { alert('Error deleting student'); }
+    };
+
+    window.resolveComplaint = async function(id) {
+        try {
+            await fetch(`/api/admin/complaints/${id}`, {
+                method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({status: 'Completed'})
+            });
+            loadAdminData();
+        } catch(e) { alert('Error updating complaint'); }
+    };
+
+    window.toggleFeeStatus = async function(id, currentStatus) {
+        const newStatus = currentStatus === 'Paid' ? 'Pending' : 'Paid';
+        try {
+            await fetch(`/api/admin/fees/${id}`, {
+                method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({fee_status: newStatus})
+            });
+            loadAdminData();
+        } catch(e) { alert('Error updating fee status'); }
+    };
+
+    window.loadAttendance = async function() {
+        const dateInput = document.getElementById('attendanceDate');
+        if(!dateInput.value) {
+            dateInput.valueAsDate = new Date();
+        }
+        const date = dateInput.value;
+        try {
+            const resp = await fetch('/api/admin/attendance?date=' + date);
+            const data = await resp.json();
+            const tbody = document.getElementById('attendanceTableBody');
+            tbody.innerHTML = '';
+            if(data.attendance && data.attendance.length > 0) {
+                data.attendance.forEach(s => {
+                    const tr = document.createElement('tr');
+                    const badge = `<span style="padding:4px 8px; border-radius:4px; font-size:12px; background:${s.status==='Present' ? '#dcfce7' : (s.status==='Absent' ? '#fee2e2' : '#fef3c7')}; color:${s.status==='Present' ? '#166534' : (s.status==='Absent' ? '#991b1b' : '#92400e')}">${s.status || 'Not Marked'}</span>`;
+                    tr.innerHTML = `
+                        <td>${s.name}</td>
+                        <td>${s.roll_no}</td>
+                        <td>${s.room_id || 'N/A'}</td>
+                        <td>${badge}</td>
+                        <td>
+                            <button class="btn" style="background:#10b981; padding:5px 10px; font-size:12px;" onclick="markAttendance(${s.id}, 'Present')">Present</button>
+                            <button class="btn" style="background:#ef4444; padding:5px 10px; font-size:12px;" onclick="markAttendance(${s.id}, 'Absent')">Absent</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="5">No active students found</td></tr>';
+            }
+        } catch(e) { console.error(e); }
+    };
+
+    window.markAttendance = async function(id, status) {
+        const date = document.getElementById('attendanceDate').value;
+        try {
+            await fetch('/api/admin/attendance', {
+                method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({date, student_id: id, status})
+            });
+            loadAttendance();
+        } catch(e) { alert('Error marking attendance'); }
+    };
+
+    window.loadLeaves = async function() {
+        try {
+            const resp = await fetch('/api/admin/leave');
+            const data = await resp.json();
+            const tbody = document.getElementById('leavesTableBody');
+            tbody.innerHTML = '';
+            if(data.leaves && data.leaves.length > 0) {
+                data.leaves.forEach(l => {
+                    const tr = document.createElement('tr');
+                    let badgeColor = l.status === 'Approved' ? '#dcfce7' : (l.status === 'Rejected' ? '#fee2e2' : '#fef3c7');
+                    let badgeTextColor = l.status === 'Approved' ? '#166534' : (l.status === 'Rejected' ? '#991b1b' : '#92400e');
+                    const badge = `<span style="padding:4px 8px; border-radius:4px; font-size:12px; background:${badgeColor}; color:${badgeTextColor}">${l.status}</span>`;
+                    tr.innerHTML = `
+                        <td>${l.student_name}</td>
+                        <td>${l.roll_no}</td>
+                        <td>${l.reason}</td>
+                        <td>${l.start_date} to ${l.end_date}</td>
+                        <td>${badge}</td>
+                        <td>
+                            ${l.status === 'Pending' ? `
+                            <button class="btn" style="background:#10b981; padding:5px 10px; font-size:12px;" onclick="updateLeave(${l.id}, 'Approved')">Approve</button>
+                            <button class="btn" style="background:#ef4444; padding:5px 10px; font-size:12px;" onclick="updateLeave(${l.id}, 'Rejected')">Reject</button>
+                            ` : '-'}
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="6">No leave requests found</td></tr>';
+            }
+        } catch(e) { console.error(e); }
+    };
+
+    window.updateLeave = async function(id, status) {
+        try {
+            await fetch(`/api/admin/leave/${id}`, {
+                method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({status})
+            });
+            loadLeaves();
+        } catch(e) { alert('Error updating leave status'); }
+    };
+
+    window.loadNotices = async function() {
+        try {
+            const resp = await fetch('/api/admin/notices');
+            const data = await resp.json();
+            const tbody = document.getElementById('noticesTableBody');
+            tbody.innerHTML = '';
+            if(data.notices && data.notices.length > 0) {
+                data.notices.forEach(n => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${n.date}</td>
+                        <td>${n.notice}</td>
+                        <td>
+                            <button class="btn" style="background:#ef4444; padding:5px 10px; font-size:12px;" onclick="deleteNotice(${n.id})">Delete</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="3">No notices found</td></tr>';
+            }
+        } catch(e) { console.error(e); }
+    };
+
+    window.deleteNotice = async function(id) {
+        if(!confirm('Delete this notice?')) return;
+        try {
+            await fetch(`/api/admin/notices/${id}`, { method: 'DELETE' });
+            loadNotices();
+        } catch(e) { alert('Error deleting notice'); }
+    };
+    window.loadRooms = async function() {
+        try {
+            const resp = await fetch('/api/admin/rooms-availability');
+            const data = await resp.json();
+            const container = document.getElementById('roomsGridContainer');
+            container.innerHTML = '';
+            
+            if(data.rooms && data.rooms.length > 0) {
+                data.rooms.forEach(r => {
+                    const box = document.createElement('div');
+                    const occupants = r.occupants || 0;
+                    const capacity = 2; // Fixed capacity
+                    
+                    let statusText = 'Available';
+                    let colorClass = 'r-green';
+                    
+                    if (occupants === 1) {
+                        statusText = 'Half Occupied';
+                        colorClass = 'r-yellow';
+                    } else if (occupants >= capacity) {
+                        statusText = 'Full';
+                        colorClass = 'r-red';
+                    }
+                    
+                    box.className = `room-box ${colorClass}`;
+                    box.innerHTML = `
+                        <h4 style="margin-bottom:8px;">#${r.room_id}</h4>
+                        <p style="font-size:18px; font-weight:700; margin-bottom:4px;">${occupants}/${capacity}</p>
+                        <p style="font-size:10px; opacity:0.8; text-transform:uppercase; letter-spacing:1px;">${statusText}</p>
+                    `;
+                    container.appendChild(box);
+                });
+            } else {
+                container.innerHTML = '<p>No room data found</p>';
+            }
+        } catch(e) { 
+            console.error(e);
+            document.getElementById('roomsGridContainer').innerHTML = '<p>Error loading data</p>';
+        }
+    };
+
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        if(!localStorage.getItem('admin_session')) {
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        loadAdminData();
+        loadAttendance();
+        loadLeaves();
+        loadNotices();
+        loadRooms();
+        const sessionData = localStorage.getItem('admin_session');
+        if(!sessionData) {
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Feature: Add Student Form Submit
+        document.getElementById('addStudentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('saveStudentBtn');
+            btn.textContent = 'Saving...';
+            btn.disabled = true;
+
+            const payload = {
+                name: document.getElementById('newSName').value,
+                roll_no: document.getElementById('newSRoll').value,
+                username: document.getElementById('newSUser').value,
+                password: document.getElementById('newSPass').value,
+                room_id: document.getElementById('newSRoom').value || null,
+                course: document.getElementById('newSCourse').value || null
+            };
+
+            try {
+                const response = await fetch('/api/admin/students', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if(response.ok) {
+                    alert('Student added successfully!');
+                    document.getElementById('addStudentModal').style.display = 'none';
+                    document.getElementById('addStudentForm').reset();
+                    // Optional: refresh dashboard data here
+                    location.reload();
+                } else {
+                    const errData = await response.json();
+                    alert('Error: ' + (errData.error || 'Failed to add student.'));
+                }
+            } catch (err) {
+                alert('Connection error.');
+            }
+            btn.textContent = 'Save';
+            btn.disabled = false;
+        });
+
+        // Feature: Edit Student Form Submit
+        document.getElementById('editStudentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('editSId').value;
+            const payload = {
+                name: document.getElementById('editSName').value,
+                roll_no: document.getElementById('editSRoll').value,
+                username: document.getElementById('editSUser').value,
+                room_id: document.getElementById('editSRoom').value || null,
+                course: document.getElementById('editSCourse').value || null,
+                fee_status: document.getElementById('editSFee').value
+            };
+            
+            try {
+                const response = await fetch(`/api/admin/students/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if(response.ok) {
+                    alert('Student updated successfully!');
+                    document.getElementById('editStudentModal').style.display = 'none';
+                    loadAdminData();
+                } else {
+                    const errData = await response.json();
+                    alert('Error: ' + (errData.error || 'Failed to update student.'));
+                }
+            } catch (err) { alert('Connection error.'); }
+        });
+
+        // Feature: Add Notice Form Submit
+        const addNoticeForm = document.getElementById('addNoticeForm');
+        if(addNoticeForm) {
+            addNoticeForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('saveNoticeBtn');
+                btn.disabled = true; btn.textContent = 'Publishing...';
+                try {
+                    const resp = await fetch('/api/admin/notices', {
+                        method: 'POST', headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ date: document.getElementById('newNoticeDate').value, notice: document.getElementById('newNoticeText').value })
+                    });
+                    if(resp.ok) {
+                        document.getElementById('addNoticeModal').style.display = 'none';
+                        document.getElementById('addNoticeForm').reset();
+                        loadNotices();
+                    } else alert('Error adding notice');
+                } catch(e) { alert('Connection error'); }
+                btn.disabled = false; btn.textContent = 'Publish';
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "hostel_management_system",
+  "version": "1.0.0",
+  "description": "The Hostel Management System is a web-based application designed to digitize and automate hostel operations such as room allotment, leave management, complaints, entry/exit tracking, and service updates. It replaces manual paper-based processes with a centralized digital platform.",
+  "main": "db-init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ananya1172006/hostel_management_system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ananya1172006/hostel_management_system/issues"
+  },
+  "homepage": "https://github.com/Ananya1172006/hostel_management_system#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^6.0.1"
+  }
+}
